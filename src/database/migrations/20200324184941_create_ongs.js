@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   return knex.schema.createTable('ongs', (table) => {
     table.string('id').primary();
