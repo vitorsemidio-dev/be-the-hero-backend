@@ -57,3 +57,11 @@ exports.down = function(knex) {
   return knex.schema.dropTable('incidents');
 };
 ```
+
+## Status das Migrations
+
+Para visualizar as migrações já executadas, utilize o comando abaixo:
+
+```
+npx knex migrate:status
+```
