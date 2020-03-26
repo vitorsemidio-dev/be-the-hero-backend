@@ -20,12 +20,12 @@ module.exports = {
 
     const [count] = await connection('incidents').count();
 
-    console.log(count);
-
     const incidents = await connection('incidents')
       .limit(5)
       .offset((page - 1) * 5)
       .select('*');
+
+    res.header('X-Total-Count', count['count(*)']);
 
     return res.json(incidents);
   },
