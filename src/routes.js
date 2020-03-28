@@ -21,7 +21,16 @@ routes.post('/ongs', celebrate({
   })
 }), OngController.store);
 
-routes.post('/incidents', IncidentController.store);
+routes.post('/incidents', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown(),
+  [Segments.BODY]: Joi.object().keys({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    value: Joi.number().required().min(1)
+  }),
+}), IncidentController.store);
 
 routes.get('/incidents', celebrate({
   [Segments.QUERY]: Joi.object().keys({
