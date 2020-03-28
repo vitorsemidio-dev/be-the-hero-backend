@@ -25,6 +25,10 @@ routes.post('/incidents', IncidentController.store);
 routes.get('/incidents', IncidentController.index);
 routes.delete('/incidents/:id', IncidentController.delete);
 
-routes.get('/profile', ProfileController.index)
+routes.get('/profile', celebrate({
+  [Segments.HEADERS]: Joi.object({
+    authorization: Joi.string().required()
+  }).unknown()
+}), ProfileController.index)
 
 module.exports = routes;
